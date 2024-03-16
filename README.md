@@ -1,4 +1,4 @@
-#<p style="text-align: center;">PenpotCommand</p>
+# PenpotCommand
 
 This repository will be used to simplify the launch of a local instance of Penpot. You need to have docker-engine installed on your computer. Clone this repository and launch the following command :
 ``` 
@@ -11,6 +11,7 @@ penpot [start|stop|update|config|backup|install|remove|help]
 ```
 
 <br/>
+
 ## Commands Details
 
 ```
