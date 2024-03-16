@@ -1,0 +1,46 @@
+#!/bin/bash
+
+function help() {
+	echo "Usage : penpot [start|stop|update|config|backup|help]"
+}
+
+if [[ $1 = start ]]
+then
+	docker compose -p penpot -f $HOME/penpot/docker-compose.yaml up -d
+	sleep 3
+	xdg-open http://localhost:9001	
+elif [[ $1 = stop ]]
+then
+	docker compose -p penpot -f $HOME/penpot/docker-compose.yaml down
+elif [[ $1 = update ]]
+then
+	docker compose -f $HOME/penpot/docker-compose.yaml pull
+elif [[ $1 = config ]]
+then
+	echo "Not yet implemented !"
+elif [[ $1 = backup ]]
+then
+	echo "Not yet implemented !"
+elif [[ $1 = install ]]
+then
+	if [[ ! -f ./docker-compose.yaml ]]
+	then
+		echo "Can't find docker-compose.yaml il the current directory. Please place it in the same directory as this script to install."
+	else
+		echo "Installing files..."
+		file=$(realpath $0)
+		mkdir -p $HOME/.local/bin
+		mv $file $HOME/.local/bin/
+		mkdir -p $HOME/.local/share/penpot
+		mv $(dirname $file)/docker-compose.yaml $HOME/.local/share/penpot/
+		echo "Complete !"
+	fi
+elif [[ $1 = remove ]]
+then
+	echo "Not yet implemented !"
+elif [[ $1 = help ]]
+then
+	help
+else
+	help
+fi
